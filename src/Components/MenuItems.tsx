@@ -12,8 +12,8 @@ export const MenuItems = [
   },
   {
     key: "3",
-    label: <Link to="/Form">Form</Link>,
-    name: "FormPage",
+    label: <Link to="/List">Form</Link>,
+    name: "List",
   },
   {
     key: "4",

@@ -7,8 +7,8 @@ import {
 import LayoutStyle from "./Components/Layout";
 import Home from "./Components/Home";
 import Health from "./Components/Health";
-import FormPage from "./Components/Form";
 import CustomerService from "./Components/CustomerService";
+import List from "./Components/UserForm/List";
 
 const App = () => {
   return (
@@ -18,7 +18,7 @@ const App = () => {
           <Route path="/" element={<Navigate to="/Home" />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/Health" element={<Health />} />
-          <Route path="/Form" element={<FormPage />} />
+          <Route path="/List" element={<List />} />
           <Route path="/CustomerService" element={<CustomerService />} />
         </Route>
       </Routes>
