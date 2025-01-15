@@ -4,6 +4,7 @@ import NavHeader from "./NavHeader";
 import Marquee from "react-fast-marquee";
 import TopHeader from "./TopHeader";
 import { Outlet } from "react-router-dom";
+import FooterLayout from "./Footer";
 
 const { Content, Footer } = Layout;
 
@@ -70,15 +71,7 @@ const LayoutStyle: React.FC = () => {
           <Outlet />
         </div>
       </Content>
-      <Footer
-        style={{
-          textAlign: "center",
-          backgroundColor: "#263A57",
-          color: "white",
-        }}
-      >
-        Ant Design ©{new Date().getFullYear()} Created by Ant UED
-      </Footer>
+      <FooterLayout/>
     </Layout>
   );
 };
