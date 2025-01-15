@@ -6,7 +6,7 @@ import TopHeader from "./TopHeader";
 import { Outlet } from "react-router-dom";
 import FooterLayout from "./Footer";
 
-const { Content, Footer } = Layout;
+const { Content} = Layout;
 
 const LayoutStyle: React.FC = () => {
  
