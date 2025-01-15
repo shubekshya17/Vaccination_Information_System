@@ -16,9 +16,8 @@ import { useForm } from "antd/es/form/Form";
 import { UserCreateVM } from "../ViewModel/UserCreateVM";
 import { useState } from "react";
 import axios from "axios";
-//import { useQueryClient } from "@tanstack/react-query";
 
-const Create = (props: { open: boolean; onClose: () => void }) => {
+const AdminUserCreate = (props: { open: boolean; onClose: () => void }) => {
   const [form] = useForm();
   const [checkboxState, setCheckboxState] = useState(false);
   const [numOfChildren, setNumOfChildren] = useState<number | null>(null);
@@ -28,10 +27,10 @@ const Create = (props: { open: boolean; onClose: () => void }) => {
     try {
       const finalResult = {
         ...values,
-        maritalStatus:(values.maritalStatus) || false,
+        maritalStatus: values.maritalStatus || false,
         wardNo: Number(values.wardNo),
         age: Number(values.age),
-        noOfChild: Number(values.noOfChild) | 0,
+        noOfChild: Number(values?.noOfChild) | 0,
         childAge: values?.childAge?.map((x) => Number(x)),
       };
       const response = await axios.post(
@@ -147,9 +146,9 @@ const Create = (props: { open: boolean; onClose: () => void }) => {
               <Form.Item
                 label="No Of Child"
                 name="noOfChild"
-                rules={[
-                  { required: true, message: "No Of Child is required!" },
-                ]}
+                // rules={[
+                //   { required: true, message: "No Of Child is required!" },
+                // ]}
               >
                 <Input
                   type="number"
@@ -205,4 +204,4 @@ const Create = (props: { open: boolean; onClose: () => void }) => {
   );
 };
 
-export default Create;
+export default AdminUserCreate;

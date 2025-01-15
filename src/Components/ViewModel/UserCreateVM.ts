@@ -11,6 +11,7 @@ export interface UserCreateVM {
   childAge: number[];
 }
 export interface UserListVM {
+    id:number;
     name: string;
     phone: string;
     address: string;

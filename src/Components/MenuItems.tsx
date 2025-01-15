@@ -17,6 +17,11 @@ export const MenuItems = [
   },
   {
     key: "4",
+    label: <Link to="/AdminUserList">Admin</Link>,
+    name: "AdminUserList",
+  },
+  {
+    key: "5",
     label: <Link to="/CustomerService">Customer Service</Link>,
     name: "CustomerService",
   },

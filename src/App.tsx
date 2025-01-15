@@ -9,6 +9,7 @@ import Home from "./Components/Home";
 import Health from "./Components/Health";
 import CustomerService from "./Components/CustomerService";
 import List from "./Components/UserForm/List";
+import AdminUserList from "./Components/Admin/UserList";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/Home" element={<Home />} />
           <Route path="/Health" element={<Health />} />
           <Route path="/List" element={<List />} />
+          <Route path="/AdminUserList" element={<AdminUserList />} />
           <Route path="/CustomerService" element={<CustomerService />} />
         </Route>
       </Routes>
