@@ -2,6 +2,7 @@ import { Card, Carousel } from "antd";
 import Aos from "aos";
 import React, { useEffect } from "react";
 import "aos/dist/aos.css";
+import Description from "./Description";
 
 const contentStyle: React.CSSProperties = {
   margin: 0,
@@ -53,7 +54,7 @@ const Home: React.FC = () => {
         </div>
 
         <div style={{ width: "45%" }}>
-          <Card style={contentStyle}></Card>
+          <Card style={contentStyle}><Description/></Card>
         </div>
       </div>
 
