@@ -11,6 +11,7 @@ import CustomerService from "./Components/CustomerService";
 import List from "./Components/UserForm/List";
 import AdminUserList from "./Components/Admin/UserList";
 import FullDescription from "./Components/FullDescription";
+import VaccinationInfoList from "./Components/VaccinationInfo/VaccinationInfoList";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/AdminUserList" element={<AdminUserList />} />
           <Route path="/CustomerService" element={<CustomerService />} />
           <Route path="/FullDescription" element={<FullDescription />} />
+          <Route path="/VaccinationInfo" element={<VaccinationInfoList />} />
         </Route>
       </Routes>
     </Router>

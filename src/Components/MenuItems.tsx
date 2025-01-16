@@ -22,6 +22,11 @@ export const MenuItems = [
   },
   {
     key: "5",
+    label: <Link to="/VaccinationInfo">VaccinationInfo</Link>,
+    name: "VaccinationInfo",
+  },
+  {
+    key: "6",
     label: <Link to="/CustomerService">Customer Service</Link>,
     name: "CustomerService",
   },
