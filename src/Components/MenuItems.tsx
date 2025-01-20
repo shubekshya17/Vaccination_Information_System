@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-export const MenuItems = [
+
+const token = localStorage.getItem("token");
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  window.location.href = "/Home";
+};
+
+const MenuItems = [
   {
     key: "1",
     label: <Link to="/">Home</Link>,
@@ -17,17 +24,37 @@ export const MenuItems = [
   },
   {
     key: "4",
-    label: <Link to="/AdminUserList">Admin</Link>,
-    name: "AdminUserList",
-  },
-  {
-    key: "5",
-    label: <Link to="/VaccinationInfo">VaccinationInfo</Link>,
-    name: "VaccinationInfo",
-  },
-  {
-    key: "6",
     label: <Link to="/CustomerService">Customer Service</Link>,
     name: "CustomerService",
   },
+  {
+    key: "5",
+    label: <Link to="/Login">Admin</Link>,
+    name: "Login",
+  },
 ];
+
+if (token) {
+  MenuItems.push(
+    {
+      key: "6",
+      label: <Link to="/AdminUserList">Users</Link>,
+      name: "AdminUserList",
+    },
+    {
+      key: "7",
+      label: <Link to="/VaccinationInfo">Vaccination Info</Link>,
+      name: "VaccinationInfo",
+    },
+    {
+      key: "8",
+      label: (
+        <Link to="#" onClick={handleLogout}>
+          Logout
+        </Link>
+      ),
+      name: "Logout",
+    }
+  );
+}
+export { MenuItems };
