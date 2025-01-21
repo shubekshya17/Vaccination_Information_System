@@ -63,7 +63,7 @@ const List: React.FC = () => {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <Card

@@ -16,13 +16,11 @@ import { useForm } from "antd/es/form/Form";
 import { UserCreateVM } from "../ViewModel/UserCreateVM";
 import { useState } from "react";
 import axios from "axios";
-//import { useQueryClient } from "@tanstack/react-query";
 
 const Create = (props: { open: boolean; onClose: () => void }) => {
   const [form] = useForm();
   const [checkboxState, setCheckboxState] = useState(false);
   const [numOfChildren, setNumOfChildren] = useState<number | null>(null);
-  //const queryClient = useQueryClient();
 
   const onFinish = async (values: UserCreateVM) => {
     try {
@@ -40,9 +38,6 @@ const Create = (props: { open: boolean; onClose: () => void }) => {
       );
       if (response.status === 201) {
         form.resetFields();
-        // queryClient.invalidateQueries({
-        //   predicate: (query) => query.queryKey.includes("user-list"),
-        // });
         message.success(response.data?.message || "User saved successfully!");
         props.onClose();
       } else {

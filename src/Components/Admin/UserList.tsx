@@ -29,6 +29,7 @@ const AdminUserList: React.FC = () => {
           const response = await axios.delete(
             `http://localhost:4000/api/v1/users/delete/${id}`
           );
+          fetchData();
           if (response.status === 200) {
             message.success(response.data?.message);
           } else {
@@ -59,7 +60,7 @@ const AdminUserList: React.FC = () => {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const columns: ColumnsType<UserListVM> = [
     {

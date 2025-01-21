@@ -21,7 +21,6 @@ const AdminUserCreate = (props: { open: boolean; onClose: () => void }) => {
   const [form] = useForm();
   const [checkboxState, setCheckboxState] = useState(false);
   const [numOfChildren, setNumOfChildren] = useState<number | null>(null);
-  //const queryClient = useQueryClient();
 
   const onFinish = async (values: UserCreateVM) => {
     try {
@@ -39,9 +38,6 @@ const AdminUserCreate = (props: { open: boolean; onClose: () => void }) => {
       );
       if (response.status === 201) {
         form.resetFields();
-        // queryClient.invalidateQueries({
-        //   predicate: (query) => query.queryKey.includes("user-list"),
-        // });
         message.success(response.data?.message || "User saved successfully!");
         props.onClose();
       } else {

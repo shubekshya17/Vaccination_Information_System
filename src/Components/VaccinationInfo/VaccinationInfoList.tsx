@@ -31,6 +31,7 @@ const VaccinationInfoList: React.FC = () => {
             `http://localhost:4000/api/v1/vaccinationInfo/delete/${id}`
           );
           if (response.status === 200) {
+            fetchData();
             message.success(response.data?.message);
           } else {
             message.error(response.data?.message);
@@ -99,7 +100,7 @@ const VaccinationInfoList: React.FC = () => {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <Card
