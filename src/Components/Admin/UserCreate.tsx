@@ -17,7 +17,7 @@ import { UserCreateVM } from "../ViewModel/UserCreateVM";
 import { useState } from "react";
 import axios from "axios";
 
-const AdminUserCreate = (props: { open: boolean; onClose: () => void }) => {
+const AdminUserCreate = (props: { open: boolean; onClose: () => void; fetchData: () => void }) => {
   const [form] = useForm();
   const [checkboxState, setCheckboxState] = useState(false);
   const [numOfChildren, setNumOfChildren] = useState<number | null>(null);
@@ -40,6 +40,7 @@ const AdminUserCreate = (props: { open: boolean; onClose: () => void }) => {
         form.resetFields();
         message.success(response.data?.message || "User saved successfully!");
         props.onClose();
+        props.fetchData();
       } else {
         message.error(response.data?.message || "Failed to save User.");
       }

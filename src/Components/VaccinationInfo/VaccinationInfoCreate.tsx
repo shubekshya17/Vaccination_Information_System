@@ -19,6 +19,7 @@ import axios from "axios";
 const VaccinationInfoCreate = (props: {
   open: boolean;
   onClose: () => void;
+  fetchData: () => void;
 }) => {
   const [form] = useForm();
 
@@ -34,6 +35,7 @@ const VaccinationInfoCreate = (props: {
           response.data?.message || "Vaccination Info saved successfully!"
         );
         props.onClose();
+        props.fetchData();
       } else {
         message.error(
           response.data?.message || "Failed to save Vaccination Info."

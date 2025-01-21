@@ -100,7 +100,7 @@ const VaccinationInfoList: React.FC = () => {
   };
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   return (
     <Card
@@ -116,7 +116,7 @@ const VaccinationInfoList: React.FC = () => {
       }
     >
       <Table columns={columns} dataSource={data} />
-      <VaccinationInfoCreate open={drawerOpen} onClose={closeDrawer} />
+      <VaccinationInfoCreate open={drawerOpen} onClose={closeDrawer} fetchData={fetchData}/>
     </Card>
   );
 };

@@ -63,7 +63,7 @@ const List: React.FC = () => {
   };
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   return (
     <Card
@@ -84,7 +84,7 @@ const List: React.FC = () => {
       }
     >
       <Table columns={columns} dataSource={data} />
-      <Create open={drawerOpen} onClose={closeDrawer} />
+      <Create open={drawerOpen} onClose={closeDrawer} fetchData={fetchData}/>
     </Card>
   );
 };

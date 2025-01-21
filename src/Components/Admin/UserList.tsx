@@ -29,8 +29,8 @@ const AdminUserList: React.FC = () => {
           const response = await axios.delete(
             `http://localhost:4000/api/v1/users/delete/${id}`
           );
-          fetchData();
           if (response.status === 200) {
+            fetchData();
             message.success(response.data?.message);
           } else {
             message.error(response.data?.message);
@@ -60,7 +60,7 @@ const AdminUserList: React.FC = () => {
   };
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   const columns: ColumnsType<UserListVM> = [
     {
@@ -141,7 +141,7 @@ const AdminUserList: React.FC = () => {
       }
     >
       <Table columns={columns} dataSource={data} />
-      <AdminUserCreate open={drawerOpen} onClose={closeDrawer} />
+      <AdminUserCreate open={drawerOpen} onClose={closeDrawer} fetchData={fetchData} />
     </Card>
   );
 };
