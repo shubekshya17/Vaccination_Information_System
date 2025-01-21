@@ -132,6 +132,7 @@ export default function Login() {
             autoPlay
             loop
             muted
+            disablePictureInPicture
             style={{
               width: "100%",
               height: "100%",
