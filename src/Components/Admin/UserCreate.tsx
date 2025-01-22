@@ -14,29 +14,52 @@ import {
 import { SaveOutlined } from "@ant-design/icons";
 import { useForm } from "antd/es/form/Form";
 import { UserCreateVM } from "../ViewModel/UserCreateVM";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-const AdminUserCreate = (props: { open: boolean; onClose: () => void; fetchData: () => void }) => {
+const AdminUserCreate = (props: {
+  open: boolean;
+  onClose: () => void;
+  fetchData: () => void;
+  selectedItem: any;
+}) => {
   const [form] = useForm();
   const [checkboxState, setCheckboxState] = useState(false);
   const [numOfChildren, setNumOfChildren] = useState<number | null>(null);
 
+  useEffect(() => {
+    if (props.selectedItem) {
+      form.setFieldsValue(props.selectedItem);
+      setCheckboxState(props.selectedItem?.maritalstatus);
+    } else {
+      form.resetFields();
+      setCheckboxState(false);
+    }
+  }, [props.selectedItem, form]);
+
   const onFinish = async (values: UserCreateVM) => {
     try {
       const finalResult = {
-        ...values,
-        maritalStatus: values.maritalStatus || false,
-        wardNo: Number(values.wardNo),
+        name: values.name,
+        phone: values.phone,
+        address: values.address,
+        maritalStatus: values.maritalstatus || false,
+        wardNo: Number(values.wardno),
         age: Number(values.age),
-        noOfChild: Number(values?.noOfChild) | 0,
-        childAge: values?.childAge?.map((x) => Number(x)),
+        noOfChild: Number(values.noofchild) | 0,
+        childName: values.childname,
+        childAge: values?.childage?.map((x) => Number(x)),
       };
-      const response = await axios.post(
-        `http://localhost:4000/api/v1/create-users`,
-        finalResult
-      );
-      if (response.status === 201) {
+      const response = props.selectedItem?.id
+        ? await axios.patch(
+            `http://localhost:4000/api/v1/users/update/${props.selectedItem.id}`,
+            finalResult
+          )
+        : await axios.post(
+            `http://localhost:4000/api/v1/create-users`,
+            finalResult
+          );
+      if (response.status === 201 || response.status === 200) {
         form.resetFields();
         message.success(response.data?.message || "User saved successfully!");
         props.onClose();
@@ -52,7 +75,7 @@ const AdminUserCreate = (props: { open: boolean; onClose: () => void; fetchData:
 
   return (
     <Drawer
-      title="Create User"
+      title={props.selectedItem?.id ? "Edit User" : "Create User"}
       open={props.open}
       onClose={props.onClose}
       width={720}
@@ -109,7 +132,7 @@ const AdminUserCreate = (props: { open: boolean; onClose: () => void; fetchData:
           <Col span={8}>
             <Form.Item
               label="Ward No"
-              name="wardNo"
+              name="wardno"
               rules={[{ required: true, message: "Ward No is required!" }]}
             >
               <Input placeholder="Enter Ward No" />
@@ -127,7 +150,7 @@ const AdminUserCreate = (props: { open: boolean; onClose: () => void; fetchData:
           <Col span={8}>
             <Form.Item
               label="Marital Status"
-              name="maritalStatus"
+              name="maritalstatus"
               valuePropName="checked"
             >
               <Checkbox onChange={(e) => setCheckboxState(e.target.checked)}>
@@ -142,7 +165,7 @@ const AdminUserCreate = (props: { open: boolean; onClose: () => void; fetchData:
             <Col span={8}>
               <Form.Item
                 label="No Of Child"
-                name="noOfChild"
+                name="noofchild"
                 // rules={[
                 //   { required: true, message: "No Of Child is required!" },
                 // ]}
@@ -163,7 +186,7 @@ const AdminUserCreate = (props: { open: boolean; onClose: () => void; fetchData:
                   <Col span={8}>
                     <Form.Item
                       label={`Child ${index + 1} Name`}
-                      name={["childName", index]}
+                      name={["childname", index]}
                       rules={[
                         { required: true, message: "Child Name is required!" },
                       ]}
@@ -176,7 +199,7 @@ const AdminUserCreate = (props: { open: boolean; onClose: () => void; fetchData:
                   <Col span={8}>
                     <Form.Item
                       label={`Child ${index + 1} Age`}
-                      name={["childAge", index]}
+                      name={["childage", index]}
                       rules={[
                         { required: true, message: "Child Age is required!" },
                       ]}

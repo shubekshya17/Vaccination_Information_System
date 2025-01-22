@@ -54,7 +54,9 @@ const Home: React.FC = () => {
         </div>
 
         <div style={{ width: "45%" }}>
-          <Card style={contentStyle}><Description/></Card>
+          <Card style={contentStyle}>
+            <Description />
+          </Card>
         </div>
       </div>
 
@@ -62,52 +64,55 @@ const Home: React.FC = () => {
         style={{
           display: "flex",
           gap: "4rem",
-          marginTop: "40px",
+          marginTop: "20px",
           justifyContent: "center",
         }}
       >
-        <Card
-          hoverable
-          style={{ width: 240, height: "50%" }}
-          cover={
-            <img
-              alt="example"
-              src="https://kathmandu.gov.np/wp-content/uploads/2022/05/viber_image_2022-07-28_18-17-58-844.png"
-            />
-          }
-          data-aos="fade-up"
-        >
-          <Meta title="Balendra Shah" description="mayor@kathmandu.gov.np" />
-        </Card>
-        <Card
-          hoverable
-          style={{ width: 240, height: "50%" }}
-          cover={
-            <img
-              alt="example"
-              src="https://kathmandu.gov.np/wp-content/uploads/2022/05/viber_image_2022-05-27_19-30-33-053-removebg-preview.png"
-            />
-          }
-          data-aos="fade-up"
-        >
-          <Meta
-            title="Sunita Dangol"
-            description="deputy.mayor@kathmandu.gov.np"
-          />
-        </Card>
-        <Card
-          hoverable
-          style={{ width: 240, height: "50%" }}
-          cover={
-            <img
-              alt="example"
-              src="https://kathmandu.gov.np/wp-content/uploads/2022/09/cao-new.png"
-            />
-          }
-          data-aos="fade-up"
-        >
-          <Meta title="Saroj Guragain" description="ceo@kathmandu.gov.np" />
-        </Card>
+        {[
+          {
+            title: "Balendra Shah",
+            description: "mayor@kathmandu.gov.np",
+            image:
+              "https://kathmandu.gov.np/wp-content/uploads/2022/05/viber_image_2022-07-28_18-17-58-844.png",
+          },
+          {
+            title: "Sunita Dangol",
+            description: "deputy.mayor@kathmandu.gov.np",
+            image:
+              "https://kathmandu.gov.np/wp-content/uploads/2022/05/viber_image_2022-05-27_19-30-33-053-removebg-preview.png",
+          },
+          {
+            title: "Saroj Guragain",
+            description: "ceo@kathmandu.gov.np",
+            image:
+              "https://kathmandu.gov.np/wp-content/uploads/2022/09/cao-new.png",
+          },
+        ].map((card, index) => (
+          <Card
+            hoverable
+            key={index}
+            style={{
+              width: 240,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: 300, 
+            }}
+            cover={
+              <img
+                alt={card.title}
+                src={card.image}
+                style={{
+                  height: 200, 
+                  objectFit: "cover", 
+                }}
+              />
+            }
+            data-aos="fade-up"
+          >
+            <Meta title={card.title} description={card.description} />
+          </Card>
+        ))}
       </div>
     </>
   );

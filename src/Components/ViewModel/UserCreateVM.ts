@@ -3,12 +3,12 @@ export interface UserCreateVM {
   name: string;
   phone: string;
   address: string;
-  wardNo: number;
+  wardno: number;
   age: number;
-  maritalStatus: boolean;
-  noOfChild: number;
-  childName: string[];
-  childAge: number[];
+  maritalstatus: boolean;
+  noofchild: number;
+  childname: string[];
+  childage: number[];
 }
 export interface UserListVM {
   id: number;

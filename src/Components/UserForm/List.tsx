@@ -6,44 +6,52 @@ import Create from "./Create";
 import { ColumnsType } from "antd/es/table";
 import { UserListVM } from "../ViewModel/UserCreateVM";
 
-const columns: ColumnsType<UserListVM> = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "Phone",
-    dataIndex: "phone",
-    key: "phone",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Action",
-    dataIndex: "operation",
-    key: "operation",
-    align: "center",
-    render: () => (
-      <Tooltip
-        title="Edit"
-        placement="left"
-        color="blue"
-        autoAdjustOverflow
-        mouseEnterDelay={0.2}
-      >
-        <Button type="link" icon={<EditOutlined />}></Button>
-      </Tooltip>
-    ),
-  },
-];
-
 const List: React.FC = () => {
   const [data, setData] = useState([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
+
+  const columns: ColumnsType<UserListVM> = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+    },
+    {
+      title: "Action",
+      dataIndex: "operation",
+      key: "operation",
+      align: "center",
+      render: (_, record) => (
+        <Tooltip
+          title="Edit"
+          placement="left"
+          color="blue"
+          autoAdjustOverflow
+          mouseEnterDelay={0.2}
+        >
+          <Button
+            type="link"
+            icon={<EditOutlined />}
+            onClick={() => {
+              setSelectedItem(record);
+              setDrawerOpen(true);
+            }}
+          ></Button>
+        </Tooltip>
+      ),
+    },
+  ];
 
   const closeDrawer = () => {
     setDrawerOpen(false);
@@ -77,14 +85,22 @@ const List: React.FC = () => {
         <Button
           style={{ backgroundColor: "#263A57", color: "white" }}
           icon={<PlusOutlined />}
-          onClick={() => setDrawerOpen(true)}
+          onClick={() => {
+            setDrawerOpen(true);
+            setSelectedItem(null);
+          }}
         >
           Create New
         </Button>
       }
     >
       <Table columns={columns} dataSource={data} />
-      <Create open={drawerOpen} onClose={closeDrawer} fetchData={fetchData}/>
+      <Create
+        open={drawerOpen}
+        onClose={closeDrawer}
+        fetchData={fetchData}
+        selectedItem={selectedItem}
+      />
     </Card>
   );
 };

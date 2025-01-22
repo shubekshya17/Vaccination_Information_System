@@ -16,6 +16,7 @@ import AdminUserCreate from "./UserCreate";
 const AdminUserList: React.FC = () => {
   const [data, setData] = useState([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
 
   const deleteAction = (id: number) => {
     Modal.confirm({
@@ -92,7 +93,14 @@ const AdminUserList: React.FC = () => {
             autoAdjustOverflow
             mouseEnterDelay={0.2}
           >
-            <Button type="link" icon={<EditOutlined />}></Button>
+            <Button
+              type="link"
+              icon={<EditOutlined />}
+              onClick={() => {
+                setSelectedItem(record);
+                setDrawerOpen(true);
+              }}
+            ></Button>
           </Tooltip>
           <Tooltip
             title="Delete"
@@ -127,7 +135,10 @@ const AdminUserList: React.FC = () => {
           <Button
             style={{ backgroundColor: "#263A57", color: "white" }}
             icon={<PlusOutlined />}
-            onClick={() => setDrawerOpen(true)}
+            onClick={() => {
+              setDrawerOpen(true);
+              setSelectedItem(null);
+            }}
           >
             Create New
           </Button>
@@ -141,7 +152,12 @@ const AdminUserList: React.FC = () => {
       }
     >
       <Table columns={columns} dataSource={data} />
-      <AdminUserCreate open={drawerOpen} onClose={closeDrawer} fetchData={fetchData} />
+      <AdminUserCreate
+        open={drawerOpen}
+        onClose={closeDrawer}
+        fetchData={fetchData}
+        selectedItem={selectedItem}
+      />
     </Card>
   );
 };
