@@ -1,8 +1,13 @@
 import React from "react";
 import { Menu } from "antd";
 import { MenuItems } from "./MenuItems";
+import { useLocation } from "react-router-dom";
 
 const NavHeader: React.FC = () => {
+  const location = useLocation();
+  const currentPath = location.pathname.replace("/","");
+  const selectedKey = MenuItems.find((item) => item.name === currentPath)?.key || "1";
+
   return (
     <div
       style={{
@@ -20,7 +25,8 @@ const NavHeader: React.FC = () => {
       <Menu
         theme="dark"
         mode="horizontal"
-        defaultSelectedKeys={["1"]}
+        selectedKeys={[selectedKey]}
+        //defaultSelectedKeys={["1"]}
         items={MenuItems.map((item) => ({
           key: item.key,
           label: item.label,

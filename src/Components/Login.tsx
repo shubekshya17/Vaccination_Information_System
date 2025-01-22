@@ -11,7 +11,6 @@ export default function Login() {
   const screens = useBreakpoint();
 
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
     if(values.email==="test@gmail.com" && values.password === "Test@123"){
         localStorage.setItem("token","Pass");
         window.location.href=("/AdminUserList")
